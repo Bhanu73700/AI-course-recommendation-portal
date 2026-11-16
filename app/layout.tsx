@@ -1,54 +1,49 @@
+import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { FloatingAssistant } from "@/components/assistant/FloatingAssistant";
 
-export const metadata = {
-  title: "CourseAI",
-  description: "AI-powered learning discovery platform",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "CourseAI — AI Course Recommendation & Career Roadmap Platform",
+  description:
+    "Deterministic AI course recommendations, skill-gap analysis, and interactive career roadmaps. 100% local, zero tracking.",
+  openGraph: {
+    title: "CourseAI — AI Course Recommendation & Career Roadmap Platform",
+    description: "Transparent, deterministic skill-gap and course matching engine.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en">
-      <body>
-        <nav className="nav">
-          <div
-            className="container"
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <Link href="/" className="brand">
-              Course<span>AI</span>
-            </Link>
-
-            <div className="navlinks">
-              <Link href="/recommend">Recommendations</Link>
-              <Link href="/courses">Courses</Link>
-              <Link href="/roadmap">Roadmap</Link>
-              <Link href="/chat">AI Assistant</Link>
-              <Link href="/dashboard">Dashboard</Link>
-              <Link href="/compare">Compare</Link>
-              <Link href="/plan">Study Plan</Link>
-            </div>
-
-            <Link className="btn" href="/assessment">
-              Get Started
-            </Link>
-          </div>
-        </nav>
-
-        {children}
-
-        <footer className="footer">
-          CourseAI • AI-powered learning discovery platform
-        </footer>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen flex flex-col font-sans pb-16 lg:pb-0">
+        <Navbar />
+        <main className="flex-1 max-w-content mx-auto w-full px-4 sm:px-6 py-6 sm:py-8">
+          {children}
+        </main>
+        <Footer />
+        <MobileNav />
+        <FloatingAssistant />
       </body>
     </html>
   );

@@ -1,3 +1,81 @@
-import Link from 'next/link';
-const features=[['🤖','AI Recommendations','Get ranked courses based on your skills, goals, time and budget.'],['📊','Skill Gap Analysis','See exactly which skills you need for your target career.'],['🗺️','Career Roadmaps','Follow a step-by-step learning path from beginner to job-ready.'],['💬','AI Learning Assistant','Ask questions and get personalized study guidance.'],['📄','Resume Analyzer','Extract skills from your resume and discover missing skills.'],['📈','Progress Tracking','Track completed courses, goals and your learning streak.']];
-export default function Home(){return <><section className="hero"><div className="container"><div className="kicker">Personalized learning intelligence</div><h1>Find the right courses for the career you want.</h1><p>CourseAI analyzes your skills, interests, career goal, available time and budget to create a personalized learning path—with course recommendations, skill-gap analysis and an AI study assistant.</p><div className="heroActions"><Link className="btn" href="/assessment">Build My Learning Plan →</Link><Link className="btn secondary" href="/courses">Explore Courses</Link></div></div></section><section className="section"><div className="container"><div className="kicker">Everything in one place</div><h2 className="title">Your personal learning copilot</h2><div className="grid grid3">{features.map(([i,t,d])=><div className="card" key={t}><div style={{fontSize:28}}>{i}</div><h3>{t}</h3><p className="muted">{d}</p></div>)}</div></div></section><section className="section"><div className="container"><div className="card" style={{background:'#101828',color:'#fff'}}><div className="twoCol"><div><div className="kicker">Example</div><h2 className="title">From “I want to become a developer” to a concrete plan.</h2><p style={{color:'#c9ced8'}}>CourseAI maps your existing knowledge to the skills required by your target career and fills the gaps with courses and projects.</p><Link className="btn" href="/assessment">Try the assessment</Link></div><div className="card"><div className="small muted">Recommended path</div><div className="list">{['JavaScript','React','Node.js + Express','MongoDB','Next.js','Full-Stack Projects'].map((x,i)=><div className="row" key={x}><b>{i+1}. {x}</b><span className="badge">{i<2?'Strong':'Next'}</span></div>)}</div></div></div></div></div></section></>}
+import Link from "next/link";
+import { TrackPicker } from "@/components/track/TrackPicker";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Compass, Sparkles, Shield, Cpu, Target, CheckCircle2 } from "lucide-react";
+
+export default function HomePage() {
+  return (
+    <div className="space-y-12 sm:space-y-16">
+      {/* Editorial Hero */}
+      <section className="text-center max-w-3xl mx-auto space-y-4 pt-4 sm:pt-8">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-surface text-muted text-xs">
+          <Sparkles className="h-3.5 w-3.5 text-accent" />
+          <span>Transparent, Deterministic Course & Roadmap Recommendation</span>
+        </div>
+
+        <h1 className="text-3xl sm:text-5xl font-semibold tracking-tightest text-foreground leading-[1.15]">
+          What do you want to learn?
+        </h1>
+
+        <p className="text-base sm:text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+          Select your primary learning track below. CourseAI analyzes your skill gap, filters out the noise, and maps the shortest path to your target career role.
+        </p>
+      </section>
+
+      {/* Track Selection Section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-border/80 pb-3">
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-foreground">
+              Choose your primary track
+            </h2>
+            <p className="text-xs text-muted">
+              Select one main focus. You can switch tracks or add secondary interests at any time.
+            </p>
+          </div>
+        </div>
+
+        <TrackPicker />
+      </section>
+
+      {/* Value Pillars */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-8 border-t border-border/60">
+        <div className="p-5 rounded-card border border-border bg-background space-y-2">
+          <div className="h-8 w-8 rounded-lg bg-surface border border-border flex items-center justify-center text-accent">
+            <Cpu className="h-4 w-4" />
+          </div>
+          <h3 className="font-semibold text-sm text-foreground">
+            Deterministic Match Engine
+          </h3>
+          <p className="text-xs text-muted leading-relaxed">
+            Every match score is computed transparently across 7 weighted dimensions: skill gap, difficulty fit, career goal, budget, and time commitment.
+          </p>
+        </div>
+
+        <div className="p-5 rounded-card border border-border bg-background space-y-2">
+          <div className="h-8 w-8 rounded-lg bg-surface border border-border flex items-center justify-center text-accent">
+            <Target className="h-4 w-4" />
+          </div>
+          <h3 className="font-semibold text-sm text-foreground">
+            Targeted Skill-Gap Analysis
+          </h3>
+          <p className="text-xs text-muted leading-relaxed">
+            See exactly what skills you have and what you are missing compared to real-world job roles like Junior Android Engineer or Frontend Developer.
+          </p>
+        </div>
+
+        <div className="p-5 rounded-card border border-border bg-background space-y-2">
+          <div className="h-8 w-8 rounded-lg bg-surface border border-border flex items-center justify-center text-accent">
+            <Shield className="h-4 w-4" />
+          </div>
+          <h3 className="font-semibold text-sm text-foreground">
+            100% Client-Side Privacy
+          </h3>
+          <p className="text-xs text-muted leading-relaxed">
+            Zero external tracking, no database, and no paid API tokens. Your assessment answers, progress, and uploaded resumes remain strictly in your browser.
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
